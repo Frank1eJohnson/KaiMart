@@ -4,6 +4,8 @@ This project is part of the **my hobby collections** where I build this project 
 
 ![Header](Content/1.jpg)
 
+Stanford University CS193U Reference Project (Fall '20) **Details: [Course Page](https://courses.sabrave.com/p/unrealengine-cpp?coupon_code=COMMUNITY15&src=github)**
+
 **Current Engine Version: 4.27**
 
 ![Combat Example Still](Content/6.jpg)
