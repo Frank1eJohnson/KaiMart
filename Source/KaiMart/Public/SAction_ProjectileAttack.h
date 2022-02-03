@@ -8,7 +8,6 @@
 
 class UAnimMontage;
 class UParticleSystem;
-class USoundBase;
 
 /**
  * 
@@ -19,14 +18,6 @@ class KAIMART_API USAction_ProjectileAttack : public USAction
 	GENERATED_BODY()
 	
 protected:
-
-	/* Sphere radius of the sweep to find desired target under crosshair. Adjusts final projectile direction */
-	UPROPERTY(EditAnywhere, Category="Targeting")
-	float SweepRadius;
-
-	/* Fallback distance when sweep finds no collision under crosshair. Adjusts final projectile direction */
-	UPROPERTY(EditAnywhere, Category="Targeting")
-	float SweepDistanceFallback;
 
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	TSubclassOf<AActor> ProjectileClass;
@@ -43,10 +34,6 @@ protected:
 	/* Particle System played during attack animation */
 	UPROPERTY(EditAnywhere, Category = "Attack")
 	UParticleSystem* CastingEffect;
-
-	/* Sound Effect to play (Can be Wave or Cue) */
-	UPROPERTY(EditAnywhere, Category = "Attack")
-	USoundBase* CastingSound;
 
 	UFUNCTION()
 	void AttackDelay_Elapsed(ACharacter* InstigatorCharacter);

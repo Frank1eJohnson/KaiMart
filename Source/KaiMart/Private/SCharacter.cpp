@@ -10,7 +10,6 @@
 #include "SAttributeComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "SActionComponent.h"
-#include "Components/CapsuleComponent.h"
 
 // Sets default values
 ASCharacter::ASCharacter()
@@ -33,12 +32,6 @@ ASCharacter::ASCharacter()
 
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	bUseControllerRotationYaw = false;
-	
-	// Enabled on mesh to react to incoming projectiles
-	GetMesh()->SetGenerateOverlapEvents(true);
-	// Disable on capsule collision to avoid double-dipping and receiving 2 overlaps when entering trigger zones etc.
-	// Once from the mesh, and 2nd time from capsule
-	GetCapsuleComponent()->SetGenerateOverlapEvents(false);
 
 	TimeToHitParamName = "TimeToHit";
 }
@@ -155,22 +148,14 @@ void ASCharacter::PrimaryInteract()
 
 void ASCharacter::OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta)
 {
-	// Damaged
 	if (Delta < 0.0f)
 	{
 		GetMesh()->SetScalarParameterValueOnMaterials(TimeToHitParamName, GetWorld()->TimeSeconds);
-
-		// Rage added equal to damage received (Abs to turn into positive rage number)
-		float RageDelta = FMath::Abs(Delta);
-		AttributeComp->ApplyRage(InstigatorActor, RageDelta);
 	}
 
-	// Died
 	if (NewHealth <= 0.0f && Delta < 0.0f)
 	{
 		APlayerController* PC = Cast<APlayerController>(GetController());
 		DisableInput(PC);
-
-		SetLifeSpan(5.0f);
 	}
 }

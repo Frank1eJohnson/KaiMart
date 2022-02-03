@@ -9,21 +9,14 @@
 
 
 class USphereComponent;
-class UStaticMeshComponent;
 
 
-UCLASS(ABSTRACT)
+UCLASS()
 class KAIMART_API ASPowerupActor : public AActor, public ISGameplayInterface
 {
 	GENERATED_BODY()
 
 protected:
-
-	UPROPERTY(ReplicatedUsing="OnRep_IsActive")
-	bool bIsActive;
-
-	UFUNCTION()
-	void OnRep_IsActive();
 
 	UPROPERTY(EditAnywhere, Category = "Powerup")
 	float RespawnTime;
@@ -40,14 +33,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	USphereComponent* SphereComp;
 
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	UStaticMeshComponent* MeshComp;
-
 public:
 
 	void Interact_Implementation(APawn* InstigatorPawn) override;
-
-	FText GetInteractText_Implementation(APawn* InstigatorPawn);
 
 public:
 

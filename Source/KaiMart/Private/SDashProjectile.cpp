@@ -5,7 +5,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Sound/SoundCue.h"
 
 
 
@@ -36,8 +35,6 @@ void ASDashProjectile::Explode_Implementation()
 
 	UGameplayStatics::SpawnEmitterAtLocation(this, ImpactVFX, GetActorLocation(), GetActorRotation());
 
-	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
-
 	EffectComp->DeactivateSystem();
 
 	MoveComp->StopMovementImmediately();
@@ -58,17 +55,5 @@ void ASDashProjectile::TeleportInstigator()
 	{
 		// Keep instigator rotation or it may end up jarring
 		ActorToTeleport->TeleportTo(GetActorLocation(), ActorToTeleport->GetActorRotation(), false, false);
-
-		// Play shake on the player we teleported
-		APawn* InstigatorPawn = Cast<APawn>(ActorToTeleport);
-		APlayerController* PC = Cast<APlayerController>(InstigatorPawn->GetController());
-		if (PC && PC->IsLocalController())
-		{
-			PC->ClientStartCameraShake(ImpactShake);
-		}
-
 	}
-
-	// Now we're ready to destroy self
-	Destroy();
 }

@@ -21,15 +21,7 @@ public:
 
 	void Interact_Implementation(APawn* InstigatorPawn);
 
-	void OnActorLoaded_Implementation();
-
 protected:
-
-	UPROPERTY(ReplicatedUsing="OnRep_LidOpened", BlueprintReadOnly, SaveGame) // RepNotify
-	bool bLidOpened;
-
-	UFUNCTION()
-	void OnRep_LidOpened();
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BaseMesh;

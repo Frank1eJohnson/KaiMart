@@ -20,14 +20,12 @@ class KAIMART_API ASPowerup_HealthPotion : public ASPowerupActor
 	
 protected:
 
-	UPROPERTY(EditAnywhere, Category = "HealthPotion")
-	int32 CreditCost;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UStaticMeshComponent* MeshComp;
 
 public:
 
 	void Interact_Implementation(APawn* InstigatorPawn) override;
-
-	FText GetInteractText_Implementation(APawn* InstigatorPawn) override;
 
 	ASPowerup_HealthPotion();
 };
